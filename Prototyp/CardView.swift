@@ -8,33 +8,38 @@ import Foundation
 import SwiftUI
 
 struct CardView: View {
-    var rank: String = "8"
+    var rank: String = "10"
     var color: String = "♥︎"
     
     var body: some View {
 
-        VStack{
+
             HStack{
                 VStack{
-                    Text(rank).font(.largeTitle).foregroundColor(Color.yellow)
+                    Text(rank).font(.largeTitle).foregroundColor(Color.yellow).baselineOffset(0)
                     Text(color).font(.largeTitle).foregroundColor(Color.yellow)
                     Spacer()
-                }.padding(10)
+                }.padding([.leading,.top],10).frame(width: 50)
                 //Spacer()
                 //middlePosition
                 Text(color).font(.system(size: 50))
                     .minimumScaleFactor(0.1)
                     .foregroundColor(Color.yellow)
                                                 .shadow(color: .orange, radius: 1.5, x: 5, y: 5)
+                    .frame(width: 50)
                 //Spacer()
                 VStack{
-                    Text(color).font(.largeTitle).foregroundColor(Color.yellow)
                     Text(rank).font(.largeTitle).foregroundColor(Color.yellow)
+                        .baselineOffset(0)
+                    Text(color).font(.largeTitle).foregroundColor(Color.yellow)
                     Spacer()
-                }.rotationEffect(.degrees(180)).padding(10)
+                }.rotationEffect(.degrees(180)).padding([.trailing,.bottom],10).frame(width: 50)
             }
-        }.background(Color.black).cornerRadius(30).aspectRatio(2/3,contentMode: .fit)
-        .padding()
+            .background(Color.black).cornerRadius(30).aspectRatio(2/3,contentMode: .fit)
+            .minimumScaleFactor(0.01)
+            //.frame( idealWidth: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, idealHeight: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
+            //.frame(width: 200, height: 300)
+        
     }
     
     var middlePosition: some View{

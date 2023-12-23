@@ -9,7 +9,6 @@ import SwiftUI
 import Foundation
 
 struct ContentView: View {
-    var cards:[(String,String)]=[("6","♥︎"),("9","♣︎"),("Q","♥︎")]
     @ObservedObject var viewModel: BlackJackViewModel
     var body: some View {
         VStack{
