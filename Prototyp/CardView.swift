@@ -10,35 +10,42 @@ import SwiftUI
 struct CardView: View {
     var rank: String = "10"
     var color: String = "♥︎"
+    var isFaceUp: Bool=false
+    
     
     var body: some View {
 
 
             HStack{
-                VStack{
-                    Text(rank).font(.largeTitle).foregroundColor(Color.yellow).baselineOffset(0)
-                    Text(color).font(.largeTitle).foregroundColor(Color.yellow)
-                    Spacer()
-                }.padding([.leading,.top],10).frame(width: 50)
-                //Spacer()
-                //middlePosition
-                Text(color).font(.system(size: 50))
-                    .minimumScaleFactor(0.1)
-                    .foregroundColor(Color.yellow)
-                                                .shadow(color: .orange, radius: 1.5, x: 5, y: 5)
-                    .frame(width: 50)
-                //Spacer()
-                VStack{
-                    Text(rank).font(.largeTitle).foregroundColor(Color.yellow)
-                        .baselineOffset(0)
-                    Text(color).font(.largeTitle).foregroundColor(Color.yellow)
-                    Spacer()
-                }.rotationEffect(.degrees(180)).padding([.trailing,.bottom],10).frame(width: 50)
+                
+                if isFaceUp {
+                    VStack{
+                        Text(rank).font(.largeTitle).foregroundColor(Color.yellow).baselineOffset(0)
+                        Text(color).font(.largeTitle).foregroundColor(Color.yellow)
+                        Spacer()
+                    }.padding([.leading,.top],10).frame(width: 50)
+                    Text(color).font(.system(size: 50))
+                        .minimumScaleFactor(0.1)
+                        .foregroundColor(Color.yellow)
+                        .shadow(color: .orange, radius: 1.5, x: 5, y: 5)
+                        .frame(width: 50)
+                    VStack{
+                        Text(rank).font(.largeTitle).foregroundColor(Color.yellow).baselineOffset(0)
+                        Text(color).font(.largeTitle).foregroundColor(Color.yellow)
+                        Spacer()
+                    }.rotationEffect(.degrees(180)).padding([.trailing,.bottom],10).frame(width: 50)
+
+                }else{
+                    Image(uiImage: UIImage(named: "back_of_card")!)
+                }
+                
+                
+                
             }
             .background(Color.black).cornerRadius(30).aspectRatio(2/3,contentMode: .fit)
             .minimumScaleFactor(0.01)
             //.frame( idealWidth: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, idealHeight: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/)
-            //.frame(width: 200, height: 300)
+            .frame(width: 200, height: 300)
         
     }
     

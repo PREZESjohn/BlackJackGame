@@ -48,6 +48,24 @@ class BlackJackViewModel: ObservableObject {
     func startOver(){
         model = BlackJackViewModel.createBlackJackModel()
     }
+    func shiftCards(numbCards: Int, index: Int)->CGFloat{
+        var offsetX: CGFloat
+        
+        if(numbCards==2){
+            offsetX = -30.0+(CGFloat(index)*50.0)
+        }else if(numbCards==2){
+            offsetX = -50.0+(CGFloat(index)*50.0)
+        }else if(numbCards==2){
+            offsetX = -70.0+(CGFloat(index)*50.0)
+        }else if(numbCards==2){
+            offsetX = -80.0+(CGFloat(index)*40.0)
+        }else if(numbCards==2){
+            offsetX = -80.0+(CGFloat(index)*30.0)
+        }else{
+            offsetX = -80.0+(CGFloat(index)*20.0)
+        }
+        return offsetX
+    }
     
  }
     

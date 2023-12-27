@@ -12,22 +12,25 @@ struct ContentView: View {
     @ObservedObject var viewModel: BlackJackViewModel
     var body: some View {
         VStack{
+            otherCards
             Spacer()
             playerCards
         }.padding()
         
     }
     var playerCards: some View{
-        HStack{
-            HStack{
-                ForEach(viewModel.playerHand){i in
-                    CardView(rank: i.value, color:i.suit)
-                }
+        ZStack{
+            ForEach(viewModel.playerHand){i in
+                CardView(rank: i.value, color:i.suit,isFaceUp: i.isFaceUp)
+                    .offset(x: viewModel.shiftCards(numbCards: viewModel.playerHand.count, index: viewModel.playerHand.firstIndex(of: i) ?? 0))
             }
-            HStack{
-                ForEach(viewModel.otherHand){i in
-                    CardView(rank: i.value, color:i.suit)
-                }
+        }
+    }
+    var otherCards: some View{
+        ZStack{
+            ForEach(viewModel.otherHand){i in
+                CardView(rank: i.value, color:i.suit,isFaceUp: i.isFaceUp)
+                    .offset(x: viewModel.shiftCards(numbCards: viewModel.otherHand.count, index: viewModel.otherHand.firstIndex(of: i) ?? 0))
             }
         }
     }

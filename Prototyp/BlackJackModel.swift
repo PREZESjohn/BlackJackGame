@@ -34,7 +34,11 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         }
         deck.shuffle()
         playerHand.append(deck[0])
-        otherHand.append(deck[1])
+        playerHand.append(deck[1])
+        otherHand.append(deck[2])
+        otherHand.append(deck[3])
+        deck.removeFirst(4)
+        otherHand[0].isFaceUp=false
         bet = 100
         playerBalance = 1000
     }
@@ -56,7 +60,7 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
     struct Card : Equatable, Identifiable {
             var id: String
             var value:String  = "2"
-            var isFaceUp:Bool = false
+            var isFaceUp:Bool = true
             var suit: String = "♣︎"
     }
     
