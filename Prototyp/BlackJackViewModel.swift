@@ -34,7 +34,7 @@ class BlackJackViewModel: ObservableObject {
     }
     
     func hit() {
-        
+        model.hit()
     }
     
     func stay() {
@@ -53,13 +53,13 @@ class BlackJackViewModel: ObservableObject {
         
         if(numbCards==2){
             offsetX = -30.0+(CGFloat(index)*50.0)
-        }else if(numbCards==2){
+        }else if(numbCards==3){
             offsetX = -50.0+(CGFloat(index)*50.0)
-        }else if(numbCards==2){
+        }else if(numbCards==4){
             offsetX = -70.0+(CGFloat(index)*50.0)
-        }else if(numbCards==2){
+        }else if(numbCards==5){
             offsetX = -80.0+(CGFloat(index)*40.0)
-        }else if(numbCards==2){
+        }else if(numbCards==6){
             offsetX = -80.0+(CGFloat(index)*30.0)
         }else{
             offsetX = -80.0+(CGFloat(index)*20.0)

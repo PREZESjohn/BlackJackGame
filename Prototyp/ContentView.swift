@@ -15,6 +15,7 @@ struct ContentView: View {
             otherCards
             Spacer()
             playerCards
+            OptionButtons(viewModel: viewModel)
         }.padding()
         
     }

@@ -44,6 +44,17 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
     }
     
     mutating func hit(){
+        var score=playerCardsScore()
+        print("wynik przed hit: "+String(score))
+        
+        playerHand.append(deck[0])
+        deck.removeFirst(1)
+        
+         score=playerCardsScore()
+        print("wynik po hit: "+String(score))
+        if(score>21){
+            print("gracz spalil karty")
+        }
         
     }
     
@@ -54,8 +65,27 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
     mutating func bet(value: Int){
         
     }
-    
-    
+    func playerCardsScore()->Int{
+        var score: Int=0
+        var aceCount=0
+        
+        for card in playerHand{
+            switch card.value {
+                case "J","Q","K":
+                    score+=10
+                case "A":
+                    score+=11
+                    aceCount+=1
+                default:
+                    score+=Int(card.value) ?? 0
+            }
+            while(score>21 && aceCount>0){
+                score-=10
+                aceCount-=1
+            }
+        }
+        return score
+    }
     
     struct Card : Equatable, Identifiable {
             var id: String
