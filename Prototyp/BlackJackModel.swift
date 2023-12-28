@@ -39,7 +39,7 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         otherHand.append(deck[3])
         deck.removeFirst(4)
         otherHand[0].isFaceUp=false
-        bet = 100
+        bet = 0
         playerBalance = 1000
     }
     
@@ -62,8 +62,11 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         
     }
     
-    mutating func bet(value: Int){
-        
+    mutating func setBet(value: Int){
+        bet+=value
+    }
+    mutating func resetBet(){
+        bet=0
     }
     func playerCardsScore()->Int{
         var score: Int=0

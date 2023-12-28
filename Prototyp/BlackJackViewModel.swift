@@ -41,8 +41,14 @@ class BlackJackViewModel: ObservableObject {
         
     }
     
-    func bet(value:Int) {
-        
+    func setBet(value:Int) {
+        model.setBet(value: value)
+    }
+    func getBet()->Int{
+        return model.bet
+    }
+    func resetBet(){
+        model.resetBet()
     }
     
     func startOver(){

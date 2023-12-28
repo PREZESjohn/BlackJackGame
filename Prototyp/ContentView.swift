@@ -11,12 +11,20 @@ import Foundation
 struct ContentView: View {
     @ObservedObject var viewModel: BlackJackViewModel
     var body: some View {
-        VStack{
-            otherCards
+        HStack(){
+            BetButtons(viewModel: viewModel)
+                .padding(.trailing,35)
+            VStack{
+                otherCards
+                Spacer()
+                
+                Spacer()
+                playerCards
+                OptionButtons(viewModel: viewModel)
+            }
             Spacer()
-            playerCards
-            OptionButtons(viewModel: viewModel)
-        }.padding()
+        }
+        
         
     }
     var playerCards: some View{
