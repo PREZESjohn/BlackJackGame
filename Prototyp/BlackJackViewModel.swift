@@ -42,14 +42,41 @@ class BlackJackViewModel: ObservableObject {
         model.stand()
     }
     
-    func setBet(value:Int) {
-        model.setBet(value: value)
+    func incrementBet(value:Int) {
+        let currentPlayerBalance=getPlayerBalance()
+        if currentPlayerBalance>=value{
+            model.incrementBet(value: value)
+            changePlayerBalance(amount: value, type: "bet")
+        }else{
+            print("niewystarczajace srodki do zwiekszenia betu na koncie uzytkownika")
+            //TODO: dodac wyswietlenie komunikatow (ogolnie trzeba dolozyc feedback systemu)
+        }
+        
     }
     func getBet()->Int{
         return model.bet
     }
     func resetBet(){
         model.resetBet()
+    }
+    func getPlayerBalance()->Int{
+        return model.playerBalance
+    }
+    func changePlayerBalance(amount: Int, type: String){
+        let currentPlayerBalance=getPlayerBalance()
+        
+        if type=="bet"{
+            model.setPlayerBalance(amount: (currentPlayerBalance-amount))
+        }else if type=="result"{
+            model.setPlayerBalance(amount: (currentPlayerBalance+2*amount))
+        }
+        
+    }
+    func getGameState()->GameState{
+        return model.gameState
+    }
+    func setGameState(state: GameState){
+        model.setGameState(state: state)
     }
     
     func startOver(){

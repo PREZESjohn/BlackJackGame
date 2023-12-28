@@ -14,14 +14,35 @@ struct ContentView: View {
         HStack(){
             BetButtons(viewModel: viewModel)
                 .padding(.trailing,35)
-            VStack{
-                otherCards
-                Spacer()
+            if viewModel.getGameState()==GameState.start{
+                VStack{
+                    otherCards
+                    Spacer()
+                                
+                    Spacer()
+                    playerCards
+                    OptionButtons(viewModel: viewModel)
+                }
+            }else{
+                if viewModel.getBet() != 0 {
+                    Button(action: {viewModel.setGameState(state: GameState.start)}){
+                        Text("Save bet and start game")
+                            .font(.largeTitle)
+                            .padding()
+                            .background(Color.yellow)
+                            .cornerRadius(50)
+                    }
+                }else{
+                    Text("Set bet")
+                        .font(.largeTitle)
+                        .padding()
+                        .foregroundColor(.blue)
+                        .background(Color.yellow)
+                        .cornerRadius(50)
+                }
                 
-                Spacer()
-                playerCards
-                OptionButtons(viewModel: viewModel)
             }
+            
             Spacer()
         }
         

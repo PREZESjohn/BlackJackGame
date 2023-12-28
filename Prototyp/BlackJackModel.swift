@@ -20,6 +20,7 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
     private(set) var otherHand: Array<Card>
     private(set) var playerBalance: Int
     private(set) var bet:Int
+    private(set) var gameState: GameState
 
     init(){
         deck = []
@@ -41,6 +42,7 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         otherHand[0].isFaceUp=false
         bet = 0
         playerBalance = 1000
+        gameState = .bet
     }
     
     mutating func hit(){
@@ -85,12 +87,19 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         }
     }
     
-    mutating func setBet(value: Int){
+    mutating func incrementBet(value: Int){
         bet+=value
     }
     mutating func resetBet(){
         bet=0
     }
+    mutating func setPlayerBalance(amount: Int){
+        playerBalance=amount
+    }
+    mutating func setGameState(state: GameState){
+        gameState=state
+    }
+    
     func handCardsScore(hand: Array<Card>)->Int{
         var score: Int=0
         var aceCount=0
@@ -112,6 +121,7 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         }
         return score
     }
+    
     
     struct Card : Equatable, Identifiable {
             var id: String

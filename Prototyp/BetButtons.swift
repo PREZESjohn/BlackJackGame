@@ -29,16 +29,17 @@ struct BetButtons: View {
                     .foregroundColor(.white)
                     .clipShape(Circle())
             }.padding(.vertical,10)
+            .disabled(viewModel.getGameState()==GameState.bet ? false : true)
             
             ForEach(bets){bet in
-                Button(action: {viewModel.setBet(value: bet.amount)}){
+                Button(action: {viewModel.incrementBet(value: bet.amount)}){
                     Text(String(bet.amount))
                         .font(.title)
                         .frame(width: 60, height: 60)
                         .background(bet.color)
                         .foregroundColor(.white)
                         .clipShape(Circle())
-                }
+                }.disabled(viewModel.getGameState()==GameState.bet ? false : true)
             }
             
         }
