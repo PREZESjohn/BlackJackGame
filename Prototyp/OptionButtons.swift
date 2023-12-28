@@ -20,8 +20,8 @@ struct OptionButtons: View {
                     .background(Color.yellow)
                     .cornerRadius(10)
             }
-            Button(action: viewModel.stay){
-                Text("Stay")
+            Button(action: viewModel.stand){
+                Text("Stand")
                     .font(.largeTitle)
                     .frame(width: 100, height: 52)
                     .background(Color.yellow)

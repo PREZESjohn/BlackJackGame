@@ -37,8 +37,9 @@ class BlackJackViewModel: ObservableObject {
         model.hit()
     }
     
-    func stay() {
-        
+    func stand() {
+        print("wejscie do viewmodel.stand")
+        model.stand()
     }
     
     func setBet(value:Int) {

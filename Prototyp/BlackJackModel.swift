@@ -44,22 +44,45 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
     }
     
     mutating func hit(){
-        var score=playerCardsScore()
+        var score=handCardsScore(hand: playerHand)
         print("wynik przed hit: "+String(score))
         
         playerHand.append(deck[0])
         deck.removeFirst(1)
         
-         score=playerCardsScore()
+         score=handCardsScore(hand: playerHand)
         print("wynik po hit: "+String(score))
         if(score>21){
             print("gracz spalil karty")
         }
         
     }
-    
-    mutating func stay(){
+    mutating func otherHandHit(){
+        print("wejscie do model.otherhandhit")
+
+        var score=handCardsScore(hand: otherHand)
+        print("wynik przed hit: "+String(score))
         
+        otherHand.append(deck[0])
+        deck.removeFirst(1)
+        
+        score=handCardsScore(hand: otherHand)
+        print("wynik po hit: "+String(score))
+        if(score>21){
+            print("krupier spalil karty")
+        }
+        
+    }
+    
+    
+    mutating func stand(){
+        print("wejscie do model.stand")
+        otherHand[0].isFaceUp=true
+        let score=handCardsScore(hand: otherHand)
+        print("wynik przed hit: "+String(score))
+        while handCardsScore(hand: otherHand)<17{
+            otherHandHit()
+        }
     }
     
     mutating func setBet(value: Int){
@@ -68,11 +91,11 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
     mutating func resetBet(){
         bet=0
     }
-    func playerCardsScore()->Int{
+    func handCardsScore(hand: Array<Card>)->Int{
         var score: Int=0
         var aceCount=0
         
-        for card in playerHand{
+        for card in hand{
             switch card.value {
                 case "J","Q","K":
                     score+=10
