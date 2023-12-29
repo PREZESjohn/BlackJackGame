@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+// przyciski do stawiania zakladu na 5,20,50,200. Dodatkowo przycisk do zerowania zakladu oraz wyswietlanie aktualnego zakladu i stanu konta gracza
 struct BetButtons: View {
     private let bets: [Bet]=[
         Bet(amount: 5, color: .red,id: "5"),

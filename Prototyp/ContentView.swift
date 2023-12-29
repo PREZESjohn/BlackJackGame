@@ -16,40 +16,35 @@ struct ContentView: View {
                 .padding(.trailing,35)
             if viewModel.getGameState()==GameState.bet{
                 if viewModel.getBet() != 0 {
-                                    Button(action: {viewModel.setGameState(state: GameState.start)}){
-                                        Text("Save bet and start game")
-                                            .font(.largeTitle)
-                                            .padding()
-                                            .background(Color.yellow)
-                                            .cornerRadius(50)
-                                    }
-                                }else{
-                                    Text("Set bet")
-                                        .font(.largeTitle)
-                                        .padding()
-                                        .foregroundColor(.blue)
-                                        .background(Color.yellow)
-                                        .cornerRadius(50)
-                                }
-                
+                    Button(action: {viewModel.setGameState(state: GameState.start)}){
+                        Text("Save bet and start game")
+                            .font(.largeTitle)
+                            .padding()
+                            .background(Color.yellow)
+                            .cornerRadius(50)
+                    }
+                }else{
+                    Text("Set bet")
+                        .font(.largeTitle)
+                        .padding()
+                        .foregroundColor(.blue)
+                        .background(Color.yellow)
+                        .cornerRadius(50)
+                }
             }else{
                 VStack{
-                                    otherCards
-                                    Spacer()
-                                    Text(viewModel.getMessage())
-                                        .font(.largeTitle)
-                                        .padding()
-                                    Spacer()
-                                    playerCards
-                                    OptionButtons(viewModel: viewModel)
-                                    
-                                }
+                    otherCards
+                    Spacer()
+                    Text(viewModel.getMessage())
+                        .font(.largeTitle)
+                        .padding()
+                    Spacer()
+                    playerCards
+                    OptionButtons(viewModel: viewModel)
+                }
             }
-            
             Spacer()
         }
-        
-        
     }
     var playerCards: some View{
         ZStack{

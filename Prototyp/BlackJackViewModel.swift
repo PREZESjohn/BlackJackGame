@@ -40,7 +40,7 @@ class BlackJackViewModel: ObservableObject {
         print("wejscie do viewmodel.stand")
         model.stand()
     }
-    
+    //sprawdza czy zaklad nie przekracza wartosci konta gracza
     func incrementBet(value:Int) {
         let currentPlayerBalance=getPlayerBalance()
         if currentPlayerBalance>=value{
@@ -77,6 +77,7 @@ class BlackJackViewModel: ObservableObject {
     func startOver(){
         model.startOver()
     }
+    //ustawia offset dla karty zaleznie od ilosci kart w rece
     func shiftCards(numbCards: Int, index: Int)->CGFloat{
         var offsetX: CGFloat
         

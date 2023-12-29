@@ -42,6 +42,7 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         otherHand[0].isFaceUp=false
         
     }
+    // tworzy talie kart i randomizuje
     mutating func createDeck(){
         deck = []
         let values: Array<String> = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
@@ -53,6 +54,7 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         }
         deck.shuffle()
     }
+    // funckja do ponownej rozgrywki (mozliwe przerobienie konstruktora aby to nie bylo potrzebne ale to trzeba pomyslec)
     mutating func startOver(){
         createDeck()
         playerHand=[]
@@ -69,60 +71,39 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         otherHand[0].isFaceUp=false
         
     }
-    
+    // dodanie karty do tali gracza. Jesli wynik kart gracza wynosi powyzej 20 to gra przechodzi do wykonywania dzialan przez krupiera
     mutating func hit(){
-//        var score=handCardsScore(hand: playerHand)
-//        print("wynik przed hit: "+String(score))
-//
         playerHand.append(deck[0])
         deck.removeFirst(1)
         let score=handCardsScore(hand: playerHand)
         if score > 20 {
             stand()
         }
-//         score=handCardsScore(hand: playerHand)
-//        print("wynik po hit: "+String(score))
-//        if(score>21){
-//            print("gracz spalil karty")
-//        }
-        
     }
+    //dodanie karty do tali krupiera
     mutating func otherHandHit(){
-//        print("wejscie do model.otherhandhit")
-//
-//        var score=handCardsScore(hand: otherHand)
-//        print("wynik przed hit: "+String(score))
-        
         otherHand.append(deck[0])
         deck.removeFirst(1)
-        
-        //score=handCardsScore(hand: otherHand)
-        //print("wynik po hit: "+String(score))
-//        if(score>21){
-//            print("krupier spalil karty")
-//        }
-        
     }
     
-    
+    // pokazywanie ukrytej karty w tali krupiera oraz wykonywanie dodawania karty dla tali krupiera, do momentu az ich wartosc nie przekroczy 17, pozniej sprawdza stan kart gracza oraz krupiera
     mutating func stand(){
-        //print("wejscie do model.stand")
         otherHand[0].isFaceUp=true
-        //let score=handCardsScore(hand: otherHand)
-        //print("wynik przed hit: "+String(score))
         while handCardsScore(hand: otherHand)<17{
             otherHandHit()
         }
         checkGame()
     }
-    
+    // dodaje wartosc do zakladu
     mutating func incrementBet(value: Int){
         bet+=value
     }
+    // zeruje zaklad oraz zwraca wartosc zakladu do konta gracza
     mutating func resetBet(){
         playerBalance+=bet
         bet=0
     }
+    //zmienia stan konta gracza zaleznie od dzialania. Dla ukladania zakladu - zabiera kwote z konta gracza, dla wyniku gry - dodaje kwote z zakladu do konta gracza
     mutating func changePlayerBalance(amount: Int, type: String){
         if type=="bet"{
             playerBalance =  playerBalance-amount
@@ -130,10 +111,11 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
             playerBalance = playerBalance+2*amount
         }
     }
+    // ustawia stan gry
     mutating func setGameState(state: GameState){
         gameState=state
     }
-    
+    // zlicza wartosc kart w rece
     func handCardsScore(hand: Array<Card>)->Int{
         var score: Int=0
         var aceCount=0
@@ -155,6 +137,7 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         }
         return score
     }
+    //sprawdza stan rozgrywki i zaleznie od stanu, zmienia wyswietlana wiadomosc, dodaje nagrode jesli sie nalezy
     mutating func checkGame(){
         let playerScore=handCardsScore(hand: playerHand)
         let otherScore=handCardsScore(hand: otherHand)

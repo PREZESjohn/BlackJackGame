@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+//przyciski z opcjami do dobrania karty lub potwierdzenia reki. Podczas uzyskania wyniku, wyswietla przycisk do restartu gry
 struct OptionButtons: View {
     
     @ObservedObject var viewModel: BlackJackViewModel
