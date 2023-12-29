@@ -18,6 +18,13 @@ struct BetButtons: View {
     
     var body: some View {
         VStack{
+            Text("Stan konta")
+                .frame(width: 60, height: 40)
+            Text(String(viewModel.getPlayerBalance()))
+                .frame(width: 60, height: 40)
+                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+            Text("Zakład")
+                .frame(width: 60, height: 40)
             Text(String(viewModel.getBet()))
                 .frame(width: 60, height: 40)
                 .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)

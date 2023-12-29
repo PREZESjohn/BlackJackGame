@@ -10,7 +10,6 @@ import Foundation
 
 class BlackJackViewModel: ObservableObject {
     
-    
     private static func createBlackJackModel() -> BlackJackModel<String> {
         return BlackJackModel<String>()
     }
@@ -63,14 +62,7 @@ class BlackJackViewModel: ObservableObject {
         return model.playerBalance
     }
     func changePlayerBalance(amount: Int, type: String){
-        let currentPlayerBalance=getPlayerBalance()
-        
-        if type=="bet"{
-            model.setPlayerBalance(amount: (currentPlayerBalance-amount))
-        }else if type=="result"{
-            model.setPlayerBalance(amount: (currentPlayerBalance+2*amount))
-        }
-        
+        model.changePlayerBalance(amount: amount, type: type)
     }
     func getGameState()->GameState{
         return model.gameState
@@ -78,9 +70,12 @@ class BlackJackViewModel: ObservableObject {
     func setGameState(state: GameState){
         model.setGameState(state: state)
     }
+    func getMessage()->String{
+        return model.message
+    }
     
     func startOver(){
-        model = BlackJackViewModel.createBlackJackModel()
+        model.startOver()
     }
     func shiftCards(numbCards: Int, index: Int)->CGFloat{
         var offsetX: CGFloat

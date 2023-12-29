@@ -13,20 +13,31 @@ struct OptionButtons: View {
     
     var body: some View {
         HStack{
-            Button(action: viewModel.hit){
-                Text("Hit")
-                    .font(.largeTitle)
-                    .frame(width: 100, height: 52)
-                    .background(Color.yellow)
-                    .cornerRadius(10)
+            if viewModel.getGameState()==GameState.start ? true : false {
+                Button(action: viewModel.hit){
+                    Text("Hit")
+                        .font(.largeTitle)
+                        .frame(width: 100, height: 52)
+                        .background(Color.yellow)
+                        .cornerRadius(10)
+                }
+                Button(action: viewModel.stand){
+                    Text("Stand")
+                        .font(.largeTitle)
+                        .frame(width: 100, height: 52)
+                        .background(Color.yellow)
+                        .cornerRadius(10)
+                }
+            }else{
+                Button(action: viewModel.startOver){
+                    Text("Play again")
+                        .font(.largeTitle)
+                        .frame(width: 100, height: 52)
+                        .background(Color.yellow)
+                        .cornerRadius(10)
+                }
             }
-            Button(action: viewModel.stand){
-                Text("Stand")
-                    .font(.largeTitle)
-                    .frame(width: 100, height: 52)
-                    .background(Color.yellow)
-                    .cornerRadius(10)
-            }
+            
         }
     }
 }
