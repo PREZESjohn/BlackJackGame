@@ -10,6 +10,7 @@
 		3F1937ED2B3D90BF00261783 /* BetButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1937EC2B3D90BF00261783 /* BetButtons.swift */; };
 		3F1937EF2B3DC3AA00261783 /* GameState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F1937EE2B3DC3AA00261783 /* GameState.swift */; };
 		3F3761252B3C89EF00C36117 /* OptionButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3761242B3C89EF00C36117 /* OptionButtons.swift */; };
+		3F5612E02B43019D000A5C93 /* BetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F5612DF2B43019D000A5C93 /* BetView.swift */; };
 		3FCC637C2B2F303800F8FAF7 /* PrototypApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCC637B2B2F303800F8FAF7 /* PrototypApp.swift */; };
 		3FCC637E2B2F303800F8FAF7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCC637D2B2F303800F8FAF7 /* ContentView.swift */; };
 		3FCC63802B2F303800F8FAF7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FCC637F2B2F303800F8FAF7 /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		3F1937EC2B3D90BF00261783 /* BetButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetButtons.swift; sourceTree = "<group>"; };
 		3F1937EE2B3DC3AA00261783 /* GameState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameState.swift; sourceTree = "<group>"; };
 		3F3761242B3C89EF00C36117 /* OptionButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionButtons.swift; sourceTree = "<group>"; };
+		3F5612DF2B43019D000A5C93 /* BetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetView.swift; sourceTree = "<group>"; };
 		3FCC63782B2F303800F8FAF7 /* Prototyp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Prototyp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FCC637B2B2F303800F8FAF7 /* PrototypApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypApp.swift; sourceTree = "<group>"; };
 		3FCC637D2B2F303800F8FAF7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				3F3761242B3C89EF00C36117 /* OptionButtons.swift */,
 				3F1937EC2B3D90BF00261783 /* BetButtons.swift */,
 				3F1937EE2B3DC3AA00261783 /* GameState.swift */,
+				3F5612DF2B43019D000A5C93 /* BetView.swift */,
 			);
 			path = Prototyp;
 			sourceTree = "<group>";
@@ -285,6 +288,7 @@
 				3F1937EF2B3DC3AA00261783 /* GameState.swift in Sources */,
 				3F3761252B3C89EF00C36117 /* OptionButtons.swift in Sources */,
 				3FCC63AD2B2F31C700F8FAF7 /* BlackJackViewModel.swift in Sources */,
+				3F5612E02B43019D000A5C93 /* BetView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

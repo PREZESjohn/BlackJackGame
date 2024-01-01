@@ -12,25 +12,8 @@ struct ContentView: View {
     @ObservedObject var viewModel: BlackJackViewModel
     var body: some View {
         HStack(){
-            BetButtons(viewModel: viewModel)
-                .padding(.trailing,35)
             if viewModel.getGameState()==GameState.bet{
-                if viewModel.getBet() != 0 {
-                    Button(action: {viewModel.setGameState(state: GameState.start)}){
-                        Text("Save bet and start game")
-                            .font(.largeTitle)
-                            .padding()
-                            .background(Color.yellow)
-                            .cornerRadius(50)
-                    }
-                }else{
-                    Text("Set bet")
-                        .font(.largeTitle)
-                        .padding()
-                        .foregroundColor(.blue)
-                        .background(Color.yellow)
-                        .cornerRadius(50)
-                }
+                BetView(viewModel: viewModel)
             }else{
                 VStack{
                     otherCards
@@ -43,7 +26,6 @@ struct ContentView: View {
                     OptionButtons(viewModel: viewModel)
                 }
             }
-            Spacer()
         }
     }
     var playerCards: some View{
