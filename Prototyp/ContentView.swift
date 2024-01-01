@@ -27,12 +27,22 @@ struct ContentView: View {
                 }
             }
         }
+        .frame(maxWidth: .infinity,maxHeight: .infinity)
+        //.background(Color.blue.ignoresSafeArea())
+        .background(
+            LinearGradient(gradient:Gradient(colors: [.green,.yellow,.orange]),
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing)
+            .ignoresSafeArea()
+        )
     }
     var playerCards: some View{
         ZStack{
             ForEach(viewModel.playerHand){i in
                 CardView(rank: i.value, color:i.suit,isFaceUp: i.isFaceUp)
                     .offset(x: viewModel.shiftCards(numbCards: viewModel.playerHand.count, index: viewModel.playerHand.firstIndex(of: i) ?? 0))
+                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
+                    .animation(.easeInOut(duration: 0.5))
             }
         }
     }
@@ -41,6 +51,8 @@ struct ContentView: View {
             ForEach(viewModel.otherHand){i in
                 CardView(rank: i.value, color:i.suit,isFaceUp: i.isFaceUp)
                     .offset(x: viewModel.shiftCards(numbCards: viewModel.otherHand.count, index: viewModel.otherHand.firstIndex(of: i) ?? 0))
+                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
+                    .animation(.easeInOut(duration: 0.5))
             }
         }
     }

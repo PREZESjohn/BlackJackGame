@@ -76,7 +76,9 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         playerHand.append(deck[0])
         deck.removeFirst(1)
         let score=handCardsScore(hand: playerHand)
-        if score > 20 {
+        if score > 21 {
+            checkGame()
+        }else if score == 21{
             stand()
         }
     }
@@ -91,6 +93,8 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         otherHand[0].isFaceUp=true
         while handCardsScore(hand: otherHand)<17{
             otherHandHit()
+            
+            //TODO: dodanie rodziaju opozniejia kodu
         }
         checkGame()
     }
@@ -166,6 +170,9 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         }
         
         
+    }
+    func delay(_ delay: Double,closure: @escaping ()->()){
+        DispatchQueue.main.asyncAfter(deadline: .now()+Double(Int(delay*Double(NSEC_PER_SEC)))/Double(NSEC_PER_SEC), execute: closure)
     }
     
     struct Card : Equatable, Identifiable {
