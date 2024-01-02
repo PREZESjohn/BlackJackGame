@@ -12,16 +12,37 @@ struct ContentView: View {
     @ObservedObject var viewModel: BlackJackViewModel
     var body: some View {
         HStack(){
-            if viewModel.getGameState()==GameState.bet{
+            if viewModel.getGameState()==GameState.result{
                 BetView(viewModel: viewModel)
             }else{
-                VStack{
+                VStack(spacing:20){
+                    VStack(alignment:.center){
+                        HStack(){
+                            Text("Player balance")
+                                .font(.title)
+                                .fixedSize(horizontal: false, vertical: true)
+                            Text(String(viewModel.getPlayerBalance()))
+                                .font(.title)
+                                .frame(width: 80, height: 40)
+                                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                            Text(String(viewModel.getBet()))
+                                .font(.title)
+                                .frame(width: 80, height: 40)
+                                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                            Text("Bet")
+                                .font(.title)
+                        }
+                    }
                     otherCards
-                    Spacer()
+                    //Spacer()
                     Text(viewModel.getMessage())
+                    //Text("Dealer Blackjack! You lose")
                         .font(.largeTitle)
-                        .padding()
-                    Spacer()
+                        .frame(height:90)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .multilineTextAlignment(.center)
+                        //.padding()
+                   // Spacer()
                     playerCards
                         .frame(minWidth: 350)
                         .contentShape(Rectangle())
@@ -36,6 +57,9 @@ struct ContentView: View {
                                         }else{
                                             if value.translation.height<0 && viewModel.getGameState()==GameState.start{
                                                 viewModel.stand()
+                                            }
+                                            if value.translation.height>0 && viewModel.getGameState()==GameState.result{
+                                                viewModel.startWithSameBet()
                                             }
                                         }
                                     })

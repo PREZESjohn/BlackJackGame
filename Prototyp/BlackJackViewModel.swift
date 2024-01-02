@@ -77,6 +77,9 @@ class BlackJackViewModel: ObservableObject {
     func startOver(){
         model.startOver()
     }
+    func startWithSameBet(){
+        model.startWithSameBet()
+    }
     //ustawia offset dla karty zaleznie od ilosci kart w rece
     func shiftCards(numbCards: Int, index: Int)->CGFloat{
         var offsetX: CGFloat

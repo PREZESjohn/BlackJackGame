@@ -50,15 +50,18 @@ struct BetView: View {
                 VStack(spacing:0){
                     Text("Clear bet").font(.title3)
                     Button(action: {viewModel.resetBet()} ){
-                                        Text("✕")
-                                        .font(.title)
-                                        .frame(width: 60, height: 60)
-                                        .background(Color.red)
-                                        .foregroundColor(.white)
-                                        .clipShape(Circle())
-                                    }
-                                    .padding(.vertical,10)
-                                    .disabled(viewModel.getGameState()==GameState.bet ? false : true)
+                        Text("✕")
+                            .font(.title)
+                            .frame(width: 60, height: 60)
+                            .foregroundColor(.white)
+                    }.background(
+                        viewModel.getBet()==0 ? Color.gray : Color.red
+                    )
+                    .clipShape(Circle())
+                    .padding(.vertical,10)
+                    .disabled(viewModel.getBet()==0 ? true : false)
+                    .buttonStyle(GrowButton())
+                    
                 }
                 
             }.padding(.vertical,15)
@@ -75,6 +78,7 @@ struct BetView: View {
                                 .frame(width: 60, height: 60)
                         }
                     }.disabled(viewModel.getGameState()==GameState.bet ? false : true)
+                    .buttonStyle(GrowButton())
                 }
             }.padding(.vertical,15)//.background(Color.black)
             
@@ -96,6 +100,13 @@ struct BetView: View {
             }
             Spacer()
         }
+    }
+}
+struct GrowButton: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 1.5 : 1)
+            .animation(.easeOut(duration: 0.3),value: configuration.isPressed)
     }
 }
 private struct Bet: Identifiable{

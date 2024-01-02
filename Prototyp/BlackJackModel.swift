@@ -71,6 +71,23 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         otherHand[0].isFaceUp=false
         
     }
+    //funkcja do ponownej rozgrywki, z tym samym zakladem. Mozliwosc ciaglego grania, bez przechodzienia do okna zakladu
+    mutating func startWithSameBet(){
+        createDeck()
+        playerHand=[]
+        otherHand=[]
+
+        changePlayerBalance(amount: bet, type: "bet")
+        message="Hit or stand"
+        setGameState(state: .start)
+        
+        playerHand.append(deck[0])
+        playerHand.append(deck[1])
+        otherHand.append(deck[2])
+        otherHand.append(deck[3])
+        deck.removeFirst(4)
+        otherHand[0].isFaceUp=false
+    }
     // dodanie karty do tali gracza. Jesli wynik kart gracza wynosi powyzej 20 to gra przechodzi do wykonywania dzialan przez krupiera
     mutating func hit(){
         playerHand.append(deck[0])

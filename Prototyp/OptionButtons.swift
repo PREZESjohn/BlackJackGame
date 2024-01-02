@@ -17,29 +17,34 @@ struct OptionButtons: View {
             if viewModel.getGameState()==GameState.start ? true : false {
                 Button(action: viewModel.hit){
                     Text("Hit")
-                        .font(.largeTitle)
-                        .frame(width: 100, height: 52)
-                        .background(Color.yellow)
-                        .cornerRadius(10)
-                }
+                }.buttonStyle(YellowButton())
                 Button(action: viewModel.stand){
                     Text("Stand")
-                        .font(.largeTitle)
-                        .frame(width: 100, height: 52)
-                        .background(Color.yellow)
-                        .cornerRadius(10)
-                }
+                }.buttonStyle(YellowButton())
             }else{
                 Button(action: viewModel.startOver){
+                    Text("Change bet")
+                }.buttonStyle(YellowButton())
+                Button(action: viewModel.startWithSameBet){
                     Text("Play again")
-                        .font(.largeTitle)
-                        .frame(width: 100, height: 52)
-                        .background(Color.yellow)
-                        .cornerRadius(10)
-                }
+                }.buttonStyle(YellowButton())
+                
             }
             
         }
+    }
+}
+struct YellowButton: ButtonStyle {
+    func makeBody(configuration: Configuration)->some View{
+        configuration.label
+            .frame(minWidth:100)
+            .font(.title)
+            .padding()
+            .foregroundColor(.black)
+            .background(Color.yellow)
+            .clipShape(Capsule())
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.3),value: configuration.isPressed)
     }
 }
 
