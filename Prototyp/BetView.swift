@@ -27,22 +27,19 @@ struct BetView: View {
             HStack{
                 VStack{
                     HStack(){
-                        Text("Player balance")
-                            .font(.title)
+                        Text("Player balance").font(.title)
                         Spacer()
                         Text(String(viewModel.getPlayerBalance()))
                             .font(.title)
-                            .frame(width: 80, height: 40)
+                            .frame(width: 100, height: 40)
                             .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                            
                     }
                     HStack(){
-                        Text("Bet")
-                            .font(.title)
+                        Text("Bet").font(.title)
                         Spacer()
                         Text(String(viewModel.getBet()))
                             .font(.title)
-                            .frame(width: 80, height: 40)
+                            .frame(width: 100, height: 40)
                             .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                             
                     }
@@ -54,10 +51,9 @@ struct BetView: View {
                             .font(.title)
                             .frame(width: 60, height: 60)
                             .foregroundColor(.white)
-                    }.background(
-                        viewModel.getBet()==0 ? Color.gray : Color.red
-                    )
-                    .clipShape(Circle())
+                            .background(viewModel.getBet()==0 ? Color.gray : Color.red)
+                            .clipShape(Circle())
+                    }
                     .padding(.vertical,10)
                     .disabled(viewModel.getBet()==0 ? true : false)
                     .buttonStyle(GrowButton())
@@ -65,7 +61,6 @@ struct BetView: View {
                 }
                 
             }.padding(.vertical,15)
-            
             HStack(spacing:25){
                 ForEach(bets){bet in
                     Button(action: {viewModel.incrementBet(value: bet.amount)}){
@@ -81,24 +76,27 @@ struct BetView: View {
                     .buttonStyle(GrowButton())
                 }
             }.padding(.vertical,15)//.background(Color.black)
-            
-            if viewModel.getBet() != 0 {
-                Button(action: {viewModel.setGameState(state: GameState.start)}){
-                    Text("Save bet and start game")
+            Spacer()
+            VStack{
+                if viewModel.getBet() != 0 {
+                    Button(action: {viewModel.setGameState(state: GameState.start)}){
+                        Text("Save bet and start game")
+                            .multilineTextAlignment(.center)
+                            .font(.title)
+                            .padding()
+                            .foregroundColor(.black)
+                            .background(Color.yellow)
+                            .clipShape(Capsule())
+                    }
+                }else{
+                    Text("Make a bet and start a game")
+                        .multilineTextAlignment(.center)
                         .font(.largeTitle)
                         .padding()
-                        .background(Color.yellow)
-                        .cornerRadius(50)
-                        .border(Color.white, width: 2)
-                }
-            }else{
-                Text("Make a bet and start a game")
-                    .multilineTextAlignment(.center)
-                    .font(.largeTitle)
-                    .padding()
-                    .foregroundColor(.black)
-            }
-            Spacer()
+                        .foregroundColor(.black)
+                    }
+            }.frame(height:150)
+            //Spacer()
         }
     }
 }

@@ -12,7 +12,7 @@ struct ContentView: View {
     @ObservedObject var viewModel: BlackJackViewModel
     var body: some View {
         HStack(){
-            if viewModel.getGameState()==GameState.result{
+            if viewModel.getGameState()==GameState.bet{
                 BetView(viewModel: viewModel)
             }else{
                 VStack(spacing:20){
