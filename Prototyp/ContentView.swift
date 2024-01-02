@@ -23,6 +23,23 @@ struct ContentView: View {
                         .padding()
                     Spacer()
                     playerCards
+                        .frame(minWidth: 350)
+                        .contentShape(Rectangle())
+                        .gesture(DragGesture(minimumDistance: 10, coordinateSpace: .local)
+                                    .onEnded({value in
+                                        let horAmount=value.translation.width
+                                        let verAmount=value.translation.height
+                                        if (abs(horAmount)>abs(verAmount)){
+                                            if horAmount < 0 && viewModel.getGameState()==GameState.start{
+                                                viewModel.hit()
+                                            }
+                                        }else{
+                                            if value.translation.height<0 && viewModel.getGameState()==GameState.start{
+                                                viewModel.stand()
+                                            }
+                                        }
+                                    })
+                        )
                     OptionButtons(viewModel: viewModel)
                 }
             }

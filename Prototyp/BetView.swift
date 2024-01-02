@@ -27,7 +27,7 @@ struct BetView: View {
             HStack{
                 VStack{
                     HStack(){
-                        Text("Stan konta")
+                        Text("Player balance")
                             .font(.title)
                         Spacer()
                         Text(String(viewModel.getPlayerBalance()))
@@ -37,7 +37,7 @@ struct BetView: View {
                             
                     }
                     HStack(){
-                        Text("Zakład")
+                        Text("Bet")
                             .font(.title)
                         Spacer()
                         Text(String(viewModel.getBet()))
@@ -47,16 +47,20 @@ struct BetView: View {
                             
                     }
                 }.frame(width:250)
-                Button(action: {viewModel.resetBet()} ){
-                    Text("✕")
-                    .font(.title)
-                    .frame(width: 60, height: 60)
-                    .background(Color.red)
-                    .foregroundColor(.white)
-                    .clipShape(Circle())
+                VStack(spacing:0){
+                    Text("Clear bet").font(.title3)
+                    Button(action: {viewModel.resetBet()} ){
+                                        Text("✕")
+                                        .font(.title)
+                                        .frame(width: 60, height: 60)
+                                        .background(Color.red)
+                                        .foregroundColor(.white)
+                                        .clipShape(Circle())
+                                    }
+                                    .padding(.vertical,10)
+                                    .disabled(viewModel.getGameState()==GameState.bet ? false : true)
                 }
-                .padding(.vertical,10)
-                .disabled(viewModel.getGameState()==GameState.bet ? false : true)
+                
             }.padding(.vertical,15)
             
             HStack(spacing:25){
@@ -85,6 +89,7 @@ struct BetView: View {
                 }
             }else{
                 Text("Make a bet and start a game")
+                    .multilineTextAlignment(.center)
                     .font(.largeTitle)
                     .padding()
                     .foregroundColor(.black)
