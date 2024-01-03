@@ -20,6 +20,8 @@
 		3FCC63A72B2F312D00F8FAF7 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCC63A62B2F312D00F8FAF7 /* CardView.swift */; };
 		3FCC63AB2B2F31B900F8FAF7 /* BlackJackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCC63AA2B2F31B900F8FAF7 /* BlackJackModel.swift */; };
 		3FCC63AD2B2F31C700F8FAF7 /* BlackJackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCC63AC2B2F31C700F8FAF7 /* BlackJackViewModel.swift */; };
+		3FD5BA1F2B4578EE006034CF /* InformationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD5BA1E2B4578EE006034CF /* InformationDialog.swift */; };
+		3FD5BA212B45832A006034CF /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD5BA202B45832A006034CF /* TopBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +61,8 @@
 		3FCC63A62B2F312D00F8FAF7 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		3FCC63AA2B2F31B900F8FAF7 /* BlackJackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackJackModel.swift; sourceTree = "<group>"; };
 		3FCC63AC2B2F31C700F8FAF7 /* BlackJackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackJackViewModel.swift; sourceTree = "<group>"; };
+		3FD5BA1E2B4578EE006034CF /* InformationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationDialog.swift; sourceTree = "<group>"; };
+		3FD5BA202B45832A006034CF /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,8 @@
 				3F1937EC2B3D90BF00261783 /* BetButtons.swift */,
 				3F1937EE2B3DC3AA00261783 /* GameState.swift */,
 				3F5612DF2B43019D000A5C93 /* BetView.swift */,
+				3FD5BA1E2B4578EE006034CF /* InformationDialog.swift */,
+				3FD5BA202B45832A006034CF /* TopBarView.swift */,
 			);
 			path = Prototyp;
 			sourceTree = "<group>";
@@ -286,7 +292,9 @@
 				3FCC637C2B2F303800F8FAF7 /* PrototypApp.swift in Sources */,
 				3F1937ED2B3D90BF00261783 /* BetButtons.swift in Sources */,
 				3F1937EF2B3DC3AA00261783 /* GameState.swift in Sources */,
+				3FD5BA1F2B4578EE006034CF /* InformationDialog.swift in Sources */,
 				3F3761252B3C89EF00C36117 /* OptionButtons.swift in Sources */,
+				3FD5BA212B45832A006034CF /* TopBarView.swift in Sources */,
 				3FCC63AD2B2F31C700F8FAF7 /* BlackJackViewModel.swift in Sources */,
 				3F5612E02B43019D000A5C93 /* BetView.swift in Sources */,
 			);

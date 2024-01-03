@@ -10,29 +10,14 @@ import Foundation
 
 struct ContentView: View {
     @ObservedObject var viewModel: BlackJackViewModel
+    @State var popUpActive: Bool=false
     var body: some View {
-        HStack(){
+        ZStack(){
             if viewModel.getGameState()==GameState.bet{
                 BetView(viewModel: viewModel)
             }else{
                 VStack(spacing:20){
-                    VStack(alignment:.center){
-                        HStack(){
-                            Text("Player balance")
-                                .font(.title)
-                                .fixedSize(horizontal: false, vertical: true)
-                            Text(String(viewModel.getPlayerBalance()))
-                                .font(.title)
-                                .frame(width: 80, height: 40)
-                                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                            Text(String(viewModel.getBet()))
-                                .font(.title)
-                                .frame(width: 80, height: 40)
-                                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                            Text("Bet")
-                                .font(.title)
-                        }
-                    }
+                    TopBarView(viewModel: viewModel, popUpActive: $popUpActive)
                     otherCards
                     //Spacer()
                     Text(viewModel.getMessage())
@@ -66,6 +51,9 @@ struct ContentView: View {
                         )
                     OptionButtons(viewModel: viewModel)
                 }
+            }
+            if popUpActive{
+                InformationDialog(isActive: $popUpActive)
             }
         }
         .frame(maxWidth: .infinity,maxHeight: .infinity)
