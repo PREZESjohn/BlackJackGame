@@ -32,6 +32,10 @@ class BlackJackViewModel: ObservableObject {
         return model.playerBalance
     }
     
+    func restartGame() {
+        model = BlackJackViewModel.createBlackJackModel();
+    }
+    
     func hit() {
         model.hit()
     }
@@ -59,7 +63,7 @@ class BlackJackViewModel: ObservableObject {
         model.resetBet()
     }
     func getPlayerBalance()->Int{
-        return model.playerBalance
+        return model.playerBalance  // TODO - usunac duplikaty
     }
     func changePlayerBalance(amount: Int, type: String){
         model.changePlayerBalance(amount: amount, type: type)

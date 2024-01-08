@@ -73,35 +73,38 @@ The dealer wins if:
                         .font(.system(size: 24))
                 }
             }.frame(height:500)
-            .fixedSize(horizontal: false, vertical: true)
-            .padding()
-            .background(Color.green)
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay(
-                VStack{
-                    HStack{
-                        Spacer()
-                        Button(action: {close()})
-                         {
-                            Image(systemName: "xmark")
-                                .font(.title2)
-                                .foregroundColor(Color.black)
-                         }
-                    }
-                    Spacer()
-                }
+                .fixedSize(horizontal: false, vertical: true)
                 .padding()
-            )
-            .shadow(radius: 20)
-            .padding(30)
-            .offset(x:0,y:offset)
-            .onAppear{
-                withAnimation(.spring()){
-                    offset=0
-                }
+                .background(Color.green)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .overlay(exitButton)
+                .shadow(radius: 20)
+                .padding(30)
+                .offset(x:0,y:offset)
+                .onAppear{
+                    withAnimation(.spring()){
+                        offset=0
+                    }
             }
         }
     }
+    
+    var exitButton: some View {
+        VStack{
+            HStack{
+                Spacer()
+                Button(action: {close()})
+                 {
+                    Image(systemName: "xmark")
+                        .font(.title2)
+                        .foregroundColor(Color.black)
+                 }
+            }
+            Spacer()
+        }
+        .padding()
+    }
+    
     func close(){
         withAnimation(.spring()){
             offset=1000

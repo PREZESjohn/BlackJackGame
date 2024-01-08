@@ -73,20 +73,22 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
     }
     //funkcja do ponownej rozgrywki, z tym samym zakladem. Mozliwosc ciaglego grania, bez przechodzienia do okna zakladu
     mutating func startWithSameBet(){
-        createDeck()
-        playerHand=[]
-        otherHand=[]
-
-        changePlayerBalance(amount: bet, type: "bet")
-        message="Hit or stand"
-        setGameState(state: .start)
-        
-        playerHand.append(deck[0])
-        playerHand.append(deck[1])
-        otherHand.append(deck[2])
-        otherHand.append(deck[3])
-        deck.removeFirst(4)
-        otherHand[0].isFaceUp=false
+        if(playerBalance>=bet){
+            createDeck()
+            playerHand=[]
+            otherHand=[]
+            
+            changePlayerBalance(amount: bet, type: "bet")
+            message="Hit or stand"
+            setGameState(state: .start)
+            
+            playerHand.append(deck[0])
+            playerHand.append(deck[1])
+            otherHand.append(deck[2])
+            otherHand.append(deck[3])
+            deck.removeFirst(4)
+            otherHand[0].isFaceUp=false
+        }
     }
     // dodanie karty do tali gracza. Jesli wynik kart gracza wynosi powyzej 20 to gra przechodzi do wykonywania dzialan przez krupiera
     mutating func hit(){
@@ -160,6 +162,7 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
     }
     //sprawdza stan rozgrywki i zaleznie od stanu, zmienia wyswietlana wiadomosc, dodaje nagrode jesli sie nalezy
     mutating func checkGame(){
+        otherHand[0].isFaceUp=true
         let playerScore=handCardsScore(hand: playerHand)
         let otherScore=handCardsScore(hand: otherHand)
         
@@ -188,10 +191,7 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         
         
     }
-    func delay(_ delay: Double,closure: @escaping ()->()){
-        DispatchQueue.main.asyncAfter(deadline: .now()+Double(Int(delay*Double(NSEC_PER_SEC)))/Double(NSEC_PER_SEC), execute: closure)
-    }
-    
+
     struct Card : Equatable, Identifiable {
             var id: String
             var value:String  = "2"

@@ -15,25 +15,23 @@ struct OptionButtons: View {
     var body: some View {
         HStack{
             if viewModel.getGameState()==GameState.start ? true : false {
-                Button(action: viewModel.hit){
-                    Text("Hit")
-                }.buttonStyle(YellowButton())
-                Button(action: viewModel.stand){
-                    Text("Stand")
-                }.buttonStyle(YellowButton())
+                customButton(action: viewModel.hit, message:"Hit")
+                customButton(action: viewModel.stand, message: "Stand")
             }else{
-                Button(action: viewModel.startOver){
-                    Text("Change bet")
-                }.buttonStyle(YellowButton())
-                Button(action: viewModel.startWithSameBet){
-                    Text("Play again")
-                }.buttonStyle(YellowButton())
-                
+                customButton(action: viewModel.startOver, message: "Change bet")
+                customButton(action: viewModel.startWithSameBet, message: "Play again").disabled(viewModel.playerBalance<=viewModel.getBet() ? true : false)
             }
             
         }
     }
+
+    func customButton(action: @escaping ()-> Void, message: String) -> some View {
+        Button(action: action){
+            Text(message)
+        }.buttonStyle(YellowButton())
+    }
 }
+
 struct YellowButton: ButtonStyle {
     func makeBody(configuration: Configuration)->some View{
         configuration.label

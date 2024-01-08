@@ -18,88 +18,113 @@ struct BetView: View {
     
     var body: some View {
         VStack{
+            logoView
+            Spacer()
+            betStatus
+            betOptions
+            Spacer()
+            startButtonPanel
+        }
+    }
+    
+    var betOptions: some View {
+        HStack(spacing:25){
+            ForEach(bets){bet in
+                Button(action: {viewModel.incrementBet(value: bet.amount)}){
+                    ZStack{
+                        Circle().fill(bet.color).frame(width: 60, height: 60)
+                        Circle().stroke(Color.white,lineWidth: 4).frame(width: 60, height: 60)
+                        Text(String(bet.amount))
+                            .font(.title)
+                            .foregroundColor(.white)
+                            .frame(width: 60, height: 60)
+                    }
+                }.disabled(viewModel.getGameState()==GameState.bet ? false : true)
+                    .buttonStyle(GrowButton())
+            }
+        }.padding(.vertical,15)
+    }
+    
+    var logoView: some View {
+        VStack{
             Text("BlackJack")
                 .font(.system(size: 80))
                 .bold()
             Text("Card Game")
                 .font(.largeTitle)
-            Spacer()
-            HStack{
-                VStack{
-                    HStack(){
-                        Text("Player balance").font(.title)
-                        Spacer()
-                        Text(String(viewModel.getPlayerBalance()))
-                            .font(.title)
-                            .frame(width: 100, height: 40)
-                            .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                            .background(Color.white)
-                    }
-                    HStack(){
-                        Text("Bet").font(.title)
-                        Spacer()
-                        Text(String(viewModel.getBet()))
-                            .font(.title)
-                            .frame(width: 100, height: 40)
-                            .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                            .background(Color.white)
-                            
-                    }
-                }.frame(width:250)
-                VStack(spacing:0){
-                    Text("Clear bet").font(.title3)
-                    Button(action: {viewModel.resetBet()} ){
-                        Text("✕")
-                            .font(.title)
-                            .frame(width: 60, height: 60)
-                            .foregroundColor(.white)
-                            .background(viewModel.getBet()==0 ? Color.gray : Color.red)
-                            .clipShape(Circle())
-                    }
-                    .padding(.vertical,10)
-                    .disabled(viewModel.getBet()==0 ? true : false)
-                    .buttonStyle(GrowButton())
-                    
-                }
+        }
+    }
+    var betStatus: some View {
+        HStack{
+        VStack{
+            HStack(){
+                Text("Player balance").font(.title)
+                Spacer()
+                Text(String(viewModel.getPlayerBalance()))
+                    .font(.title)
+                    .frame(width: 100, height: 40)
+                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                    .background(Color.white)
+            }
+            HStack(){
+                Text("Bet").font(.title)
+                Spacer()
+                Text(String(viewModel.getBet()))
+                    .font(.title)
+                    .frame(width: 100, height: 40)
+                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                    .background(Color.white)
                 
-            }.padding(.vertical,15)
-            HStack(spacing:25){
-                ForEach(bets){bet in
-                    Button(action: {viewModel.incrementBet(value: bet.amount)}){
-                        ZStack{
-                            Circle().fill(bet.color).frame(width: 60, height: 60)
-                            Circle().stroke(Color.white,lineWidth: 4).frame(width: 60, height: 60)
-                            Text(String(bet.amount))
-                                .font(.title)
-                                .foregroundColor(.white)
-                                .frame(width: 60, height: 60)
-                        }
-                    }.disabled(viewModel.getGameState()==GameState.bet ? false : true)
-                    .buttonStyle(GrowButton())
-                }
-            }.padding(.vertical,15)//.background(Color.black)
-            Spacer()
-            VStack{
-                if viewModel.getBet() != 0 {
-                    Button(action: {viewModel.setGameState(state: GameState.start)}){
-                        Text("Save bet and start game")
-                            .multilineTextAlignment(.center)
-                            .font(.title)
-                            .padding()
-                            .foregroundColor(.black)
-                            .background(Color.yellow)
-                            .clipShape(Capsule())
-                    }
-                }else{
-                    Text("Make a bet and start a game")
+            }
+        }.frame(width:250)
+        VStack(spacing:0){
+            Text("Clear bet").font(.title3)
+            Button(action: {viewModel.resetBet()} ){
+                Text("✕")
+                    .font(.title)
+                    .frame(width: 60, height: 60)
+                    .foregroundColor(.white)
+                    .background(viewModel.getBet()==0 ? Color.gray : Color.red)
+                    .clipShape(Circle())
+            }
+            .padding(.vertical,10)
+            .disabled(viewModel.getBet()==0 ? true : false)
+            .buttonStyle(GrowButton())
+            
+        }
+        
+    }.padding(.vertical,15)
+    }
+    
+    var startButtonPanel: some View {
+        VStack{
+            if viewModel.getBet() != 0 {
+                Button(action: {viewModel.setGameState(state: GameState.start)}){
+                    Text("Save bet and start game")
                         .multilineTextAlignment(.center)
-                        .font(.largeTitle)
+                        .font(.title)
                         .padding()
                         .foregroundColor(.black)
-                    }
-            }.frame(height:150)
-            //Spacer()
-        }
+                        .background(Color.yellow)
+                        .clipShape(Capsule())
+                }
+            }else if viewModel.playerBalance != 0{
+                Text("Make a bet and start a game")
+                    .multilineTextAlignment(.center)
+                    .font(.largeTitle)
+                    .padding()
+                    .foregroundColor(.black)
+            } else {
+                Text("You have lost all your money.")
+                    .multilineTextAlignment(.center)
+                    .font(.largeTitle)
+                    .padding()
+                    .foregroundColor(.black)
+                Button("Restart game") {
+                    viewModel.restartGame()
+                }
+            }
+        }.frame(height:150)
     }
 }
 struct GrowButton: ButtonStyle {

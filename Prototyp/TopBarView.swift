@@ -40,7 +40,7 @@ struct TopBarView: View {
         }
         .padding()
         .background(
-            LinearGradient(gradient:Gradient(colors: [.green,.yellow,.orange]),
+            LinearGradient(gradient:Gradient(colors: [.green,.blue,.blue]),
                            startPoint: .bottomTrailing,
                            endPoint: .topLeading)
             .ignoresSafeArea()

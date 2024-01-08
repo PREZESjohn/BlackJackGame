@@ -54,7 +54,7 @@ struct ContentView: View {
         }
         .frame(maxWidth: .infinity,maxHeight: .infinity)
         .background(
-            LinearGradient(gradient:Gradient(colors: [.green,.yellow,.orange]),
+            LinearGradient(gradient:Gradient(colors: [.blue,.green,.blue]),
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing)
             .ignoresSafeArea()
