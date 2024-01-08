@@ -85,6 +85,7 @@ The dealer wins if:
                          {
                             Image(systemName: "xmark")
                                 .font(.title2)
+                                .foregroundColor(Color.black)
                          }
                     }
                     Spacer()

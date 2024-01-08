@@ -19,15 +19,11 @@ struct ContentView: View {
                 VStack(spacing:20){
                     TopBarView(viewModel: viewModel, popUpActive: $popUpActive)
                     otherCards
-                    //Spacer()
                     Text(viewModel.getMessage())
-                    //Text("Dealer Blackjack! You lose")
                         .font(.largeTitle)
                         .frame(height:90)
                         .fixedSize(horizontal: false, vertical: true)
                         .multilineTextAlignment(.center)
-                        //.padding()
-                   // Spacer()
                     playerCards
                         .frame(minWidth: 350)
                         .contentShape(Rectangle())
@@ -57,7 +53,6 @@ struct ContentView: View {
             }
         }
         .frame(maxWidth: .infinity,maxHeight: .infinity)
-        //.background(Color.blue.ignoresSafeArea())
         .background(
             LinearGradient(gradient:Gradient(colors: [.green,.yellow,.orange]),
                 startPoint: .topLeading,

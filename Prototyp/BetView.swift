@@ -33,6 +33,7 @@ struct BetView: View {
                             .font(.title)
                             .frame(width: 100, height: 40)
                             .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                            .background(Color.white)
                     }
                     HStack(){
                         Text("Bet").font(.title)
@@ -41,6 +42,7 @@ struct BetView: View {
                             .font(.title)
                             .frame(width: 100, height: 40)
                             .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                            .background(Color.white)
                             
                     }
                 }.frame(width:250)
@@ -115,6 +117,6 @@ private struct Bet: Identifiable{
 
 struct BetView_Previews: PreviewProvider {
     static var previews: some View {
-        BetView(viewModel: BlackJackViewModel())
+        BetView(viewModel: BlackJackViewModel()).background(Color.green)
     }
 }
