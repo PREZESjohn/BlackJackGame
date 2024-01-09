@@ -18,17 +18,24 @@ struct OptionButtons: View {
                 customButton(action: viewModel.hit, message:"Hit")
                 customButton(action: viewModel.stand, message: "Stand")
             }else{
-                customButton(action: viewModel.startOver, message: "Change bet")
-                customButton(action: viewModel.startWithSameBet, message: "Play again").disabled(viewModel.playerBalance<=viewModel.getBet() ? true : false)
+                customButton(action: viewModel.changeBet, message: "Change bet")
+                playAgainButton(vm: viewModel, message: "Play again")
             }
             
         }
     }
-
+    
     func customButton(action: @escaping ()-> Void, message: String) -> some View {
         Button(action: action){
             Text(message)
         }.buttonStyle(YellowButton())
+    }
+    
+    func playAgainButton(vm: BlackJackViewModel, message: String) -> some View {
+        Button(action: vm.startWithSameBet){
+            Text(message)
+        }.buttonStyle(ChangeableButton(vm: vm.playerBalance()<vm.getBet() ? true : false))
+        .disabled(vm.playerBalance()<vm.getBet() ? true : false)
     }
 }
 
@@ -40,6 +47,21 @@ struct YellowButton: ButtonStyle {
             .padding()
             .foregroundColor(.black)
             .background(Color.yellow)
+            .clipShape(Capsule())
+            .scaleEffect(configuration.isPressed ? 1.2 : 1)
+            .animation(.easeOut(duration: 0.3),value: configuration.isPressed)
+    }
+}
+
+struct ChangeableButton: ButtonStyle {
+    var vm = true
+    func makeBody(configuration: Configuration)->some View{
+        configuration.label
+            .frame(minWidth:100)
+            .font(.title)
+            .padding()
+            .foregroundColor(.black)
+            .background(vm ? Color.gray : Color.yellow)
             .clipShape(Capsule())
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
             .animation(.easeOut(duration: 0.3),value: configuration.isPressed)

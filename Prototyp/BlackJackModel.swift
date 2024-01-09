@@ -40,8 +40,8 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         otherHand.append(deck[3])
         deck.removeFirst(4)
         otherHand[0].isFaceUp=false
-        
     }
+    
     // tworzy talie kart i randomizuje
     mutating func createDeck(){
         deck = []
@@ -54,42 +54,39 @@ struct BlackJackModel<CardContent> where CardContent : Equatable {
         }
         deck.shuffle()
     }
+    
     // funckja do ponownej rozgrywki (mozliwe przerobienie konstruktora aby to nie bylo potrzebne ale to trzeba pomyslec)
-    mutating func startOver(){
+    mutating func changeBet(){
+        prepareGame()
+        bet=0
+        setGameState(state: .bet)
+    }
+    
+    //funkcja do ponownej rozgrywki, z tym samym zakladem. Mozliwosc ciaglego grania, bez przechodzienia do okna zakladu
+    mutating func startWithSameBet(){
+        if(playerBalance>=bet){
+            prepareGame()
+            changePlayerBalance(amount: bet, type: "bet")
+            setGameState(state: .start)
+        } else {
+            bet=0
+            setGameState(state: .bet)
+        }
+    }
+    
+    mutating func prepareGame(){
         createDeck()
         playerHand=[]
         otherHand=[]
-        bet=0
         message="Hit or stand"
-        setGameState(state: .bet)
-        
         playerHand.append(deck[0])
         playerHand.append(deck[1])
         otherHand.append(deck[2])
         otherHand.append(deck[3])
         deck.removeFirst(4)
         otherHand[0].isFaceUp=false
-        
     }
-    //funkcja do ponownej rozgrywki, z tym samym zakladem. Mozliwosc ciaglego grania, bez przechodzienia do okna zakladu
-    mutating func startWithSameBet(){
-        if(playerBalance>=bet){
-            createDeck()
-            playerHand=[]
-            otherHand=[]
-            
-            changePlayerBalance(amount: bet, type: "bet")
-            message="Hit or stand"
-            setGameState(state: .start)
-            
-            playerHand.append(deck[0])
-            playerHand.append(deck[1])
-            otherHand.append(deck[2])
-            otherHand.append(deck[3])
-            deck.removeFirst(4)
-            otherHand[0].isFaceUp=false
-        }
-    }
+    
     // dodanie karty do tali gracza. Jesli wynik kart gracza wynosi powyzej 20 to gra przechodzi do wykonywania dzialan przez krupiera
     mutating func hit(){
         playerHand.append(deck[0])

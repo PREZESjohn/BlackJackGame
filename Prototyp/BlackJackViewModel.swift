@@ -16,19 +16,19 @@ class BlackJackViewModel: ObservableObject {
     
     @Published private var model = createBlackJackModel()
     
-    var deck: Array<BlackJackModel<String>.Card> {
+    func deck() -> Array<BlackJackModel<String>.Card> {
         return model.deck
     }
     
-    var playerHand: Array<BlackJackModel<String>.Card> {
+    func playerHand() -> Array<BlackJackModel<String>.Card> {
         return model.playerHand
     }
     
-    var otherHand: Array<BlackJackModel<String>.Card> {
+    func otherHand() -> Array<BlackJackModel<String>.Card> {
         return model.otherHand
     }
     
-    var playerBalance: Int {
+    func playerBalance() -> Int {
         return model.playerBalance
     }
     
@@ -78,8 +78,8 @@ class BlackJackViewModel: ObservableObject {
         return model.message
     }
     
-    func startOver(){
-        model.startOver()
+    func changeBet(){
+        model.changeBet()
     }
     func startWithSameBet(){
         model.startWithSameBet()

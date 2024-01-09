@@ -18,12 +18,15 @@ struct BetView: View {
     
     var body: some View {
         VStack{
+            
+            Spacer()
             logoView
             Spacer()
             betStatus
             betOptions
             Spacer()
             startButtonPanel
+            Spacer()
         }
     }
     
@@ -108,7 +111,7 @@ struct BetView: View {
                         .background(Color.yellow)
                         .clipShape(Capsule())
                 }
-            }else if viewModel.playerBalance != 0{
+            }else if viewModel.playerBalance() != 0{
                 Text("Make a bet and start a game")
                     .multilineTextAlignment(.center)
                     .font(.largeTitle)
@@ -118,10 +121,17 @@ struct BetView: View {
                 Text("You have lost all your money.")
                     .multilineTextAlignment(.center)
                     .font(.largeTitle)
+                    .fixedSize(horizontal: false, vertical: true)
                     .padding()
                     .foregroundColor(.black)
-                Button("Restart game") {
-                    viewModel.restartGame()
+                Button(action: {viewModel.restartGame()}) {
+                    Text("Restart Game")
+                        .multilineTextAlignment(.center)
+                        .font(.title)
+                        .padding()
+                        .foregroundColor(.black)
+                        .background(Color.yellow)
+                        .clipShape(Capsule())
                 }
             }
         }.frame(height:150)

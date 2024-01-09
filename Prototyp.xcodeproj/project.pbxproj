@@ -21,6 +21,7 @@
 		3FCC63AD2B2F31C700F8FAF7 /* BlackJackViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FCC63AC2B2F31C700F8FAF7 /* BlackJackViewModel.swift */; };
 		3FD5BA1F2B4578EE006034CF /* InformationDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD5BA1E2B4578EE006034CF /* InformationDialog.swift */; };
 		3FD5BA212B45832A006034CF /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD5BA202B45832A006034CF /* TopBarView.swift */; };
+		3FD773D62B4D6A9600FF759C /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FD773D52B4D6A9600FF759C /* GameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		3FCC63AC2B2F31C700F8FAF7 /* BlackJackViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackJackViewModel.swift; sourceTree = "<group>"; };
 		3FD5BA1E2B4578EE006034CF /* InformationDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationDialog.swift; sourceTree = "<group>"; };
 		3FD5BA202B45832A006034CF /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
+		3FD773D52B4D6A9600FF759C /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 			children = (
 				3FCC637B2B2F303800F8FAF7 /* PrototypApp.swift */,
 				3FCC637D2B2F303800F8FAF7 /* ContentView.swift */,
+				3FD773D52B4D6A9600FF759C /* GameView.swift */,
 				3FCC637F2B2F303800F8FAF7 /* Assets.xcassets */,
 				3FCC63842B2F303800F8FAF7 /* Info.plist */,
 				3FCC63812B2F303800F8FAF7 /* Preview Content */,
@@ -288,6 +291,7 @@
 				3FCC63A72B2F312D00F8FAF7 /* CardView.swift in Sources */,
 				3FCC637C2B2F303800F8FAF7 /* PrototypApp.swift in Sources */,
 				3F1937EF2B3DC3AA00261783 /* GameState.swift in Sources */,
+				3FD773D62B4D6A9600FF759C /* GameView.swift in Sources */,
 				3FD5BA1F2B4578EE006034CF /* InformationDialog.swift in Sources */,
 				3F3761252B3C89EF00C36117 /* OptionButtons.swift in Sources */,
 				3FD5BA212B45832A006034CF /* TopBarView.swift in Sources */,

@@ -51,7 +51,6 @@ struct CardView: View {
         .frame(width: 150, height: 225)
         .rotation3DEffect(.degrees(isFaceUp ? 0 : 180), axis:(0,1,0))
         .animation(.linear(duration: 0.5),value: isFaceUp)
-            
     }
 }
 
