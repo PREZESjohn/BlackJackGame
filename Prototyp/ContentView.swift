@@ -9,24 +9,25 @@ import SwiftUI
 import Foundation
 
 struct ContentView: View {
+    
     @ObservedObject var viewModel: BlackJackViewModel
-    @State var popUpActive: Bool=false
+    @State var popUpActive: Bool = false
+    
     var body: some View {
-        ZStack(){
-            if viewModel.getGameState()==GameState.bet{
+        ZStack() {
+            if viewModel.gameState == GameState.bet {
                 BetView(viewModel: viewModel)
-            }else{
+            } else {
                 GameView(viewModel: viewModel, popUpActive: $popUpActive)
             }
-            if popUpActive{
+            if popUpActive {
                 InformationDialog(isActive: $popUpActive)
             }
         }
         .frame(maxWidth: .infinity,maxHeight: .infinity)
         .background(
             LinearGradient(gradient:Gradient(colors: [.blue,.green,.blue]),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing)
+                startPoint: .topLeading, endPoint: .bottomTrailing)
             .ignoresSafeArea()
         )
     }

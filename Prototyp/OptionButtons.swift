@@ -7,15 +7,14 @@
 
 import SwiftUI
 
-//przyciski z opcjami do dobrania karty lub potwierdzenia reki. Podczas uzyskania wyniku, wyswietla przycisk do restartu gry
 struct OptionButtons: View {
     
     @ObservedObject var viewModel: BlackJackViewModel
     
     var body: some View {
         HStack{
-            if viewModel.getGameState()==GameState.start ? true : false {
-                customButton(action: viewModel.hit, message:"Hit")
+            if viewModel.gameState == GameState.start ? true : false {
+                customButton(action: viewModel.hit, message: "Hit")
                 customButton(action: viewModel.stand, message: "Stand")
             }else{
                 customButton(action: viewModel.changeBet, message: "Change bet")
@@ -26,21 +25,21 @@ struct OptionButtons: View {
     }
     
     func customButton(action: @escaping ()-> Void, message: String) -> some View {
-        Button(action: action){
+        Button(action: action) {
             Text(message)
         }.buttonStyle(YellowButton())
     }
     
     func playAgainButton(vm: BlackJackViewModel, message: String) -> some View {
-        Button(action: vm.startWithSameBet){
+        Button(action: vm.startWithSameBet) {
             Text(message)
-        }.buttonStyle(ChangeableButton(vm: vm.playerBalance()<vm.getBet() ? true : false))
-        .disabled(vm.playerBalance()<vm.getBet() ? true : false)
+        }.buttonStyle(ChangeableButton(vm: vm.playerBalance < vm.bet ? true : false))
+        .disabled(vm.playerBalance < vm.bet ? true : false)
     }
 }
 
 struct YellowButton: ButtonStyle {
-    func makeBody(configuration: Configuration)->some View{
+    func makeBody(configuration: Configuration) -> some View{
         configuration.label
             .frame(minWidth:100)
             .font(.title)
@@ -49,13 +48,13 @@ struct YellowButton: ButtonStyle {
             .background(Color.yellow)
             .clipShape(Capsule())
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
-            .animation(.easeOut(duration: 0.3),value: configuration.isPressed)
+            .animation(.easeOut(duration: 0.3), value: configuration.isPressed)
     }
 }
 
 struct ChangeableButton: ButtonStyle {
     var vm = true
-    func makeBody(configuration: Configuration)->some View{
+    func makeBody(configuration: Configuration) -> some View{
         configuration.label
             .frame(minWidth:100)
             .font(.title)
@@ -64,7 +63,7 @@ struct ChangeableButton: ButtonStyle {
             .background(vm ? Color.gray : Color.yellow)
             .clipShape(Capsule())
             .scaleEffect(configuration.isPressed ? 1.2 : 1)
-            .animation(.easeOut(duration: 0.3),value: configuration.isPressed)
+            .animation(.easeOut(duration: 0.3), value: configuration.isPressed)
     }
 }
 

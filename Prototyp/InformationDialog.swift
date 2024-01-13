@@ -9,9 +9,9 @@ import SwiftUI
 
 struct InformationDialog: View {
     
-    @Binding var isActive:Bool
-    let title = "About game"
-    let message="""
+    @Binding var isActive: Bool
+    let title: String = "About game"
+    let message: String = """
 Overview:
 
 Your goal is to get your deck of cards as close as you can to 21 without going over.
@@ -53,39 +53,46 @@ The dealer wins if:
 - The dealer's card count is greater than yours.
         
 """
-    @State private var offset: CGFloat=1000
+    @State private var offset: CGFloat = 1000
     
-    //TODO: przy szybkich kliknieciach na przycisk, nie pojawia sie okno. Jakby offset nie zdazy sie zresetowac
     var body: some View {
-        ZStack{
-            Color.black.opacity(0.1)
-                .ignoresSafeArea()
-                .onTapGesture {
-                    close()
-                }
-            VStack{
-                Text(title)
-                    .font(.title2)
-                    .bold()
-                    .padding()
-                ScrollView{
-                    Text(message)
-                        .font(.system(size: 24))
-                }
-            }.frame(height:500)
-                .fixedSize(horizontal: false, vertical: true)
-                .padding()
-                .background(Color.green)
-                .clipShape(RoundedRectangle(cornerRadius: 20))
-                .overlay(exitButton)
-                .shadow(radius: 20)
-                .padding(30)
-                .offset(x:0,y:offset)
-                .onAppear{
-                    withAnimation(.spring()){
-                        offset=0
-                    }
+        ZStack {
+            background
+            infoCard
+        }
+    }
+    
+    var background: some View {
+        Color.black.opacity(0.1)
+            .ignoresSafeArea()
+            .onTapGesture {
+                close()
             }
+    }
+    
+    var infoCard: some View {
+        VStack {
+            Text(title)
+                .font(.title2)
+                .bold()
+                .padding()
+            ScrollView {
+                Text(message)
+                    .font(.system(size: 24))
+            }
+        }.frame(height: 500)
+            .fixedSize(horizontal: false, vertical: true)
+            .padding()
+            .background(Color.green)
+            .clipShape(RoundedRectangle(cornerRadius: 20))
+            .overlay(exitButton)
+            .shadow(radius: 20)
+            .padding(30)
+            .offset(x: 0, y: offset)
+            .onAppear {
+                withAnimation(.spring()) {
+                    offset = 0
+                }
         }
     }
     
@@ -93,8 +100,7 @@ The dealer wins if:
         VStack{
             HStack{
                 Spacer()
-                Button(action: {close()})
-                 {
+                Button(action: {close()}) {
                     Image(systemName: "xmark")
                         .font(.title2)
                         .foregroundColor(Color.black)
@@ -105,10 +111,10 @@ The dealer wins if:
         .padding()
     }
     
-    func close(){
-        withAnimation(.spring()){
-            offset=1000
-            isActive=false
+    func close() {
+        withAnimation(.spring()) {
+            offset = 1000
+            isActive = false
         }
     }
 }

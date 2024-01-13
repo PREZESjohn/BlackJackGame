@@ -16,20 +16,32 @@ class BlackJackViewModel: ObservableObject {
     
     @Published private var model = createBlackJackModel()
     
-    func deck() -> Array<BlackJackModel<String>.Card> {
+    var deck: Array<BlackJackModel<String>.Card> {
         return model.deck
     }
     
-    func playerHand() -> Array<BlackJackModel<String>.Card> {
+    var playerHand: Array<BlackJackModel<String>.Card> {
         return model.playerHand
     }
     
-    func otherHand() -> Array<BlackJackModel<String>.Card> {
+    var otherHand: Array<BlackJackModel<String>.Card> {
         return model.otherHand
     }
     
-    func playerBalance() -> Int {
+    var playerBalance: Int {
         return model.playerBalance
+    }
+    
+    var bet: Int {
+        return model.bet
+    }
+    
+    var gameState: GameState {
+        return model.gameState
+    }
+    
+    var message: String {
+        return model.message
     }
     
     func restartGame() {
@@ -41,65 +53,55 @@ class BlackJackViewModel: ObservableObject {
     }
     
     func stand() {
-        print("wejscie do viewmodel.stand")
         model.stand()
     }
-    //sprawdza czy zaklad nie przekracza wartosci konta gracza
+    
+
     func incrementBet(value:Int) {
-        let currentPlayerBalance=getPlayerBalance()
-        if currentPlayerBalance>=value{
+        if playerBalance >= value {
             model.incrementBet(value: value)
             changePlayerBalance(amount: value, type: "bet")
-        }else{
+        } else {
             print("niewystarczajace srodki do zwiekszenia betu na koncie uzytkownika")
             //TODO: dodac wyswietlenie komunikatow (ogolnie trzeba dolozyc feedback systemu)
         }
-        
     }
-    func getBet()->Int{
-        return model.bet
-    }
-    func resetBet(){
+   
+    func resetBet() {
         model.resetBet()
     }
-    func getPlayerBalance()->Int{
-        return model.playerBalance  // TODO - usunac duplikaty
-    }
-    func changePlayerBalance(amount: Int, type: String){
+    
+    func changePlayerBalance(amount: Int, type: String) {
         model.changePlayerBalance(amount: amount, type: type)
     }
-    func getGameState()->GameState{
-        return model.gameState
-    }
-    func setGameState(state: GameState){
+    
+    func setGameState(state: GameState) {
         model.setGameState(state: state)
     }
-    func getMessage()->String{
-        return model.message
-    }
     
-    func changeBet(){
+    func changeBet() {
         model.changeBet()
     }
-    func startWithSameBet(){
+    
+    func startWithSameBet() {
         model.startWithSameBet()
     }
-    //ustawia offset dla karty zaleznie od ilosci kart w rece
-    func shiftCards(numbCards: Int, index: Int)->CGFloat{
+    
+    func shiftCards(numbCards: Int, index: Int) -> CGFloat {
         var offsetX: CGFloat
         
-        if(numbCards==2){
-            offsetX = -30.0+(CGFloat(index)*50.0)
-        }else if(numbCards==3){
-            offsetX = -50.0+(CGFloat(index)*50.0)
-        }else if(numbCards==4){
-            offsetX = -70.0+(CGFloat(index)*50.0)
-        }else if(numbCards==5){
-            offsetX = -80.0+(CGFloat(index)*40.0)
-        }else if(numbCards==6){
-            offsetX = -80.0+(CGFloat(index)*30.0)
-        }else{
-            offsetX = -80.0+(CGFloat(index)*20.0)
+        if numbCards == 2 {
+            offsetX = -30.0 + (CGFloat(index) * 50.0)
+        } else if numbCards == 3 {
+            offsetX = -50.0 + (CGFloat(index) * 50.0)
+        } else if numbCards == 4 {
+            offsetX = -70.0 + (CGFloat(index) * 50.0)
+        } else if numbCards == 5 {
+            offsetX = -80.0 + (CGFloat(index) * 40.0)
+        } else if numbCards == 6 {
+            offsetX = -80.0 + (CGFloat(index) * 30.0)
+        } else {
+            offsetX = -80.0 + (CGFloat(index) * 20.0)
         }
         return offsetX
     }

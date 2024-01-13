@@ -8,43 +8,51 @@
 import SwiftUI
 
 struct TopBarView: View {
+    
     @ObservedObject var viewModel: BlackJackViewModel
-    @Binding var popUpActive:Bool
+    @Binding var popUpActive: Bool
+    
     var body: some View {
-        VStack(alignment:.center){
-            HStack(){
-                Text("$:")
-                    .font(.title)
-                    .fixedSize(horizontal: false, vertical: true)
-                Text(String(viewModel.getPlayerBalance()))
-                    .font(.title)
-                    .frame(width: 80, height: 40)
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                Text("Bet:").font(.title)
-                Text(String(viewModel.getBet()))
-                    .font(.title)
+        VStack(alignment: .center) {
+            HStack() {
+                playerBalance
                 Spacer()
-                Button(action:{popUpActive=true}){
-                    Text("ℹ︎")
-                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
-                        .frame(width: 40, height: 40)
-                        .foregroundColor(.white)
-                        .background(
-                            LinearGradient(gradient:Gradient(colors: [.black,.blue]),
-                                startPoint: .bottomTrailing,
-                                endPoint: .topLeading)
-                        )
-                        .clipShape(Circle())
-                }
+                playerBet
+                Spacer()
+                informationButton
             }
+        }.font(.title)
+            .padding()
+            .background(LinearGradient(gradient: Gradient(colors: [.yellow,.green]), startPoint: .bottomTrailing, endPoint: .topLeading) .ignoresSafeArea())
+    }
+    
+    var playerBalance: some View {
+        HStack {
+            Text("$:")
+                .fixedSize(horizontal: false, vertical: true)
+            Text(String(viewModel.playerBalance))
+                .frame(width: 80, height: 40)
+                .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
         }
-        .padding()
-        .background(
-            LinearGradient(gradient:Gradient(colors: [.yellow,.green]),
-                           startPoint: .bottomTrailing,
-                           endPoint: .topLeading)
-            .ignoresSafeArea()
-        )
+    }
+    
+    var playerBet: some View {
+        HStack {
+            Text("Bet:")
+            Text(String(viewModel.bet))
+        }
+    }
+    
+    var informationButton: some View {
+        Button(action: {popUpActive = true}) {
+            Text("ℹ︎")
+                .frame(width: 40, height: 40)
+                .foregroundColor(.white)
+                .background(
+                    LinearGradient(gradient:Gradient(colors: [.black,.blue]), startPoint: .bottomTrailing,
+                        endPoint: .topLeading)
+                ).clipShape(Circle())
+        }
     }
 }
 

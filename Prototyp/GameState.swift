@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum GameState{
+enum GameState {
     case bet
     case start
     case result
