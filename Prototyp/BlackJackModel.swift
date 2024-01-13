@@ -8,13 +8,8 @@
 import Foundation
 import SwiftUI
 
-// zawiera talie 52 kart,
-// aktualny status konta gracza,
-// mozliwe stawki do obstawienia
-// reka gracza
-// reka krupiera
-
 struct BlackJackModel<CardContent> where CardContent: Equatable {
+    
     private(set) var deck: Array<Card>
     private(set) var playerHand: Array<Card>
     private(set) var otherHand: Array<Card>
@@ -23,7 +18,7 @@ struct BlackJackModel<CardContent> where CardContent: Equatable {
     private(set) var gameState: GameState
     private(set) var message: String
 
-    init(){
+    init() {
         deck = []
         playerHand = []
         otherHand = []
@@ -48,7 +43,7 @@ struct BlackJackModel<CardContent> where CardContent: Equatable {
         let suits = ["♣︎","♥︎","♦︎","♠︎"]
         for s in suits {
             for v in values {
-                deck.append(Card(id:UUID().uuidString, value: v, suit: s))
+                deck.append(Card(id: UUID().uuidString, value: v, suit: s))
             }
         }
         deck.shuffle()
@@ -104,7 +99,6 @@ struct BlackJackModel<CardContent> where CardContent: Equatable {
         otherHand[0].isFaceUp = true
         while handCardsScore(hand: otherHand) < 17 {
             otherHandHit()
-            //TODO: dodanie rodziaju opozniejia kodu
         }
         checkGame()
     }
@@ -157,8 +151,6 @@ struct BlackJackModel<CardContent> where CardContent: Equatable {
         let playerScore = handCardsScore(hand: playerHand)
         let otherScore = handCardsScore(hand: otherHand)
         
-        //TODO: dodac ekstremalne sytuacje brzegowe np. jesli gracz ma blackjack przy 3 kartach, a krupier ma blackjack przy 2 to krupier wygrywa
-        //TODO: uzycie tej funckji w miejscach gdzie na konsoli byly printowane wyniki (trzeba przeniesc funcje do modelu)
         setGameState(state: .result)
         
         if playerScore == 21 {

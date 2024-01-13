@@ -20,14 +20,13 @@ struct ContentView: View {
             } else {
                 GameView(viewModel: viewModel, popUpActive: $popUpActive)
             }
+            
             if popUpActive {
                 InformationDialog(isActive: $popUpActive)
             }
         }
         .frame(maxWidth: .infinity,maxHeight: .infinity)
-        .background(
-            LinearGradient(gradient:Gradient(colors: [.blue,.green,.blue]),
-                startPoint: .topLeading, endPoint: .bottomTrailing)
+        .background(Color(red: 0.2, green: 0.75, blue: 0.16)
             .ignoresSafeArea()
         )
     }

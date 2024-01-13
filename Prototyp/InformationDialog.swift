@@ -54,6 +54,7 @@ The dealer wins if:
         
 """
     @State private var offset: CGFloat = 1000
+    @State private var animationFinished = false;
     
     var body: some View {
         ZStack {
@@ -71,21 +72,23 @@ The dealer wins if:
     }
     
     var infoCard: some View {
-        VStack {
-            Text(title)
-                .font(.title2)
-                .bold()
-                .padding()
-            ScrollView {
-                Text(message)
-                    .font(.system(size: 24))
+        ZStack{
+            VStack {
+                Text(title)
+                    .font(.title2)
+                    .bold()
+                    .padding()
+                ScrollView {
+                    Text(message)
+                        .font(.system(size: 24))
+                }
             }
+            exitButton
         }.frame(height: 500)
             .fixedSize(horizontal: false, vertical: true)
             .padding()
             .background(Color.green)
             .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay(exitButton)
             .shadow(radius: 20)
             .padding(30)
             .offset(x: 0, y: offset)
@@ -93,7 +96,8 @@ The dealer wins if:
                 withAnimation(.spring()) {
                     offset = 0
                 }
-        }
+                
+            }
     }
     
     var exitButton: some View {
@@ -104,7 +108,7 @@ The dealer wins if:
                     Image(systemName: "xmark")
                         .font(.title2)
                         .foregroundColor(Color.black)
-                 }
+                }
             }
             Spacer()
         }
@@ -114,7 +118,7 @@ The dealer wins if:
     func close() {
         withAnimation(.spring()) {
             offset = 1000
-            isActive = false
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35, execute: { isActive = false })
         }
     }
 }

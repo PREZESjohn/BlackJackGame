@@ -22,8 +22,9 @@ struct TopBarView: View {
                 informationButton
             }
         }.font(.title)
+            .foregroundColor(.black)
             .padding()
-            .background(LinearGradient(gradient: Gradient(colors: [.yellow,.green]), startPoint: .bottomTrailing, endPoint: .topLeading) .ignoresSafeArea())
+            .background(Color.yellow)
     }
     
     var playerBalance: some View {

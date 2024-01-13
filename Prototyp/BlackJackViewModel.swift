@@ -61,9 +61,6 @@ class BlackJackViewModel: ObservableObject {
         if playerBalance >= value {
             model.incrementBet(value: value)
             changePlayerBalance(amount: value, type: "bet")
-        } else {
-            print("niewystarczajace srodki do zwiekszenia betu na koncie uzytkownika")
-            //TODO: dodac wyswietlenie komunikatow (ogolnie trzeba dolozyc feedback systemu)
         }
     }
    
@@ -101,7 +98,7 @@ class BlackJackViewModel: ObservableObject {
         } else if numbCards == 6 {
             offsetX = -80.0 + (CGFloat(index) * 30.0)
         } else {
-            offsetX = -80.0 + (CGFloat(index) * 20.0)
+            offsetX = -120.0 + (CGFloat(index) * 30.0)
         }
         return offsetX
     }
