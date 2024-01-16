@@ -23,49 +23,55 @@ struct GameView: View {
     }
     
     var otherCards: some View {
-        ZStack {
-            ForEach(viewModel.otherHand) { i in
-                CardView(rank: i.value, color: i.suit, isFaceUp: i.isFaceUp)
-                    .offset(x: viewModel.shiftCards(numbCards: viewModel.otherHand.count, index: viewModel.otherHand.firstIndex(of: i) ?? 0))
-                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
-                    .animation(.easeInOut(duration: 0.5))
+        VStack {
+            Text("Dealer hand")
+            ZStack {
+                ForEach(viewModel.otherHand) { i in
+                    CardView(rank: i.value, color: i.suit, isFaceUp: i.isFaceUp)
+                        .offset(x: viewModel.shiftCards(numbCards: viewModel.otherHand.count, index: viewModel.otherHand.firstIndex(of: i) ?? 0))
+                        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
+                        .animation(.easeInOut(duration: 0.5))
+                }
             }
         }
     }
     
     var playerCards: some View{
-        ZStack{
-            ForEach(viewModel.playerHand) { i in
-                CardView(rank: i.value, color: i.suit, isFaceUp: i.isFaceUp)
-                    .offset(x: viewModel.shiftCards(numbCards: viewModel.playerHand.count, index: viewModel.playerHand.firstIndex(of: i) ?? 0))
-                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
-                    .animation(.easeInOut(duration: 0.5))
-            }
-        }.frame(minWidth: 350)
-            .contentShape(Rectangle())
-            .gesture(DragGesture(minimumDistance: 10, coordinateSpace: .local)
-                .onEnded({ value in
-                    let horAmount=value.translation.width
-                    let verAmount=value.translation.height
-                    if abs(horAmount) > abs(verAmount) {
-                        if horAmount < 0 && viewModel.gameState == GameState.start {
-                            viewModel.hit()
+        VStack {
+            ZStack {
+                ForEach(viewModel.playerHand) { i in
+                    CardView(rank: i.value, color: i.suit, isFaceUp: i.isFaceUp)
+                        .offset(x: viewModel.shiftCards(numbCards: viewModel.playerHand.count, index: viewModel.playerHand.firstIndex(of: i) ?? 0))
+                        .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .opacity))
+                        .animation(.easeInOut(duration: 0.5))
+                }
+            }.frame(minWidth: 350)
+                .contentShape(Rectangle())
+                .gesture(DragGesture(minimumDistance: 10, coordinateSpace: .local)
+                    .onEnded({ value in
+                        let horAmount=value.translation.width
+                        let verAmount=value.translation.height
+                        if abs(horAmount) > abs(verAmount) {
+                            if horAmount < 0 && viewModel.gameState == GameState.start {
+                                viewModel.hit()
+                            }
+                        } else {
+                            if verAmount < 0 && viewModel.gameState == GameState.start {
+                                viewModel.stand()
+                            }
+                            if verAmount > 0 && viewModel.gameState == GameState.result {
+                                viewModel.startWithSameBet()
+                            }
                         }
-                    } else {
-                        if verAmount < 0 && viewModel.gameState == GameState.start {
-                            viewModel.stand()
-                        }
-                        if verAmount > 0 && viewModel.gameState == GameState.result {
-                            viewModel.startWithSameBet()
-                        }
-                    }
-                }))
+                    }))
+            Text("Your hand")
+        }
     }
     
     var messageField: some View {
         Text(viewModel.message)
             .font(.largeTitle)
-            .frame(height: 90)
+            .frame(height: 70)
             .fixedSize(horizontal: false, vertical: true)
             .multilineTextAlignment(.center)
     }
